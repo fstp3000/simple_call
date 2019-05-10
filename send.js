@@ -15,13 +15,13 @@ var sender_address = "0x132f98e1aa89ff2557f117906997d993fa33338f";
 var photoHash = "0x1100000000000000000000000000000000000000000000000000000000000000";
 var photoInfo = "0x1100000000000000000000000000000000000000000000000000000000000000";
 //################################################
-var contract = new web3.eth.Contract(abi, sc_address, {from: sender_address,gasPrice:1000000});
+var contract = new web3.eth.Contract(abi, sc_address, {from: sender_address, gasPrice:1000000});
 
 async function main() {
     await web3.eth.personal.unlockAccount(sender_address,"qazwsxedc",600);
     console.log('Account unlocked');
-    receipt = await contract.methods.addPhoto(photoHash,photoInfo).send();
-    console.log(receipt);
+    contract.methods.addPhoto(photoHash,photoInfo).send()
+    .on('transactionHash', function(hash){console.log(hash);process.exit()})    
 }
 
 module.exports = main;

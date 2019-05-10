@@ -1,24 +1,24 @@
-var Web3 = require('web3');
-web3 = new Web3(new Web3.providers.HttpProvider("http://140.112.230.86:30400"));
+#!/usr/local/bin/node
 
-var abi=[{"constant": false,"inputs": [{"name": "photohash","type": "bytes32"},{"name": "output","type": "uint256"}],"name": "addPhoto","outputs": [],"payable": false,"stateMutability": "nonpayable","type": "function"},{"constant": true,"inputs": [{"name": "photoID","type": "uint256"}],"name": "getPhoto","outputs": [{"name": "","type": "uint256"},{"name": "","type": "bytes32"},{"name": "","type": "uint256"}],"payable": false,"stateMutability": "view","type": "function"}];
+var config = require('./config');
 
-var sc_address = "0xebfb59b2e1de60807411fb6a02538e1a20a394ac";
-var sender_address = "0x132f98e1aa89ff2557f117906997d993fa33338f";
-//#############Parameter setting##################
+//default setting
 var photoHash = "0x1100000000000000000000000000000000000000000000000000000000000000";
 var photoInfo = "0x1100000000000000000000000000000000000000000000000000000000000000";
-//################################################
-var contract = new web3.eth.Contract(abi, sc_address, {from: sender_address, gasPrice:1000000});
+var pr = process.argv
+
+if(typeof pr[2]!=='undefined' && pr[2].length == 66 && pr[2].substring(0,2) == "0x")
+	photoHash = pr[2]
+if(typeof pr[3]!=='undefined' && pr[3].length == 66 && pr[3].substring(0,2) == "0x")
+	photoInfo = pr[3]
 
 async function main() {
-    contract.methods.addPhoto(photoHash,photoInfo).send()
+    config.contract.methods.addPhoto(photoHash,photoInfo).send()
     .on('transactionHash', function(hash){
-	    console.log('Hash: '+hash);
-	    console.log("****The picture has been uploaded****");
-    	    process.exit()})    
+	    				  console.log('Hash: '+hash);
+	    			 	  console.log("****The picture has been uploaded****");
+    	    				  process.exit()})    
 }
-
 module.exports = main;
 if (!module.parent)
      main();

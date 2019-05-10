@@ -3,8 +3,9 @@
 var config = require('./config');
 
 var pr = process.argv;
+var start = 0;
+
 if(typeof pr[2]!=='undefined')
-        var start;
 	start = pr[2];
 
 //console.log(start)

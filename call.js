@@ -8,8 +8,6 @@ var start = 0;
 if(typeof pr[2]!=='undefined')
 	start = pr[2];
 
-//console.log(start)
-
 async function main() {
     var index;
     for (index = start ; 1 ;index++) {

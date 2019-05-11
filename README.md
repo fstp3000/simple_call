@@ -1,6 +1,6 @@
 # Tutorial
 ```
-Npm install
+Npm install web3
 Node send.js
 Node call.js
 ```

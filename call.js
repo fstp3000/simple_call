@@ -18,6 +18,7 @@ async function main() {
            break;
            }
        receipt['0']=parseInt(receipt['0'], 10);
+       receipt['2']=receipt['2']['_hex'];
        console.log(receipt);
     } 
 }
